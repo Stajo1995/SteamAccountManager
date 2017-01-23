@@ -14,13 +14,12 @@ public class MenuView extends View {
 	private SLabel errorLabel;
 	private STextField usernameInput;
 	private SPasswordField passwordInput;
-	private SButton continueButton;
-	private SButton signUpButton;
+	private SButton addAccountButton;
 
-	private MenuController Controller;
+	private MenuController controller;
 
 	public MenuView(MenuController menuController) {
-		this.Controller = menuController;
+		this.controller = menuController;
 		this.BuildView();
 	}
 
@@ -55,31 +54,21 @@ public class MenuView extends View {
 		errorLabel.setBounds(usernameLabel.getX(), passwordInput.getY() + 20, 350, 20);
 		panel.add(errorLabel);
 
-		continueButton = new SButton("Login");
-		continueButton.addActionListener(e -> this.continueButtonPressed());
-		continueButton.setBounds(usernameLabel.getX(), errorLabel.getY() + 20, 220, 20);
-		panel.add(continueButton);
-
-		signUpButton = new SButton("Registreer");
-		signUpButton.addActionListener(e -> this.signUpButtonPressed());
-		signUpButton.setBounds(usernameLabel.getX(), continueButton.getY() + 40, 220, 20);
-		panel.add(signUpButton);
+		addAccountButton = new SButton("Registreer");
+		addAccountButton.addActionListener(e -> this.addAccountButtonPressed());
+		addAccountButton.setBounds(usernameLabel.getX(), errorLabel.getY() + 20, 220, 20);
+		panel.add(addAccountButton);
 
 		this.add(panel);
-		this.getRootPane().setDefaultButton(continueButton);
+		this.getRootPane().setDefaultButton(addAccountButton);
 		this.setVisible(true);
 		this.setDefaultFocus();
 	}
 
-	// This triggers when the sign up button has been pressed.
-	private void signUpButtonPressed() {
+	// This triggers when the add account button has been pressed.
+	private void addAccountButtonPressed() {
 		this.emptyErrorLabel();
-		System.out.println(1); // DEBUG
-	}
-
-	// This triggers when the continue button has been pressed.
-	private void continueButtonPressed() {
-		System.out.println(2); // DEBUG
+		System.out.println("DEBUG 1"); // DEBUG
 	}
 
 	// This empties the error label.
