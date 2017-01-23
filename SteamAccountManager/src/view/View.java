@@ -20,7 +20,7 @@ public class View extends JFrame {
 		this.setResizable(false);
 		this.setSize(SCREEN_SIZE_DIM);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setTitle("De Slimste Mens");
+		this.setTitle("Steam Account Manager");
 
 		// This WindowListener ensures that after a JFrame view is closed that it will open the next frame on the same position.
 		this.addWindowListener(new WindowAdapter() {
