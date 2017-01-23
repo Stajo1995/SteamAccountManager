@@ -93,11 +93,9 @@ public class MenuView extends View {
 		errorLabel.setText(NewLabel);
 		errorLabel.repaint();
 	}
-	
+
 	// Sets the default focus to the primary input textfield.
 	private void setDefaultFocus() {
 		this.usernameInput.requestFocusInWindow();
 	}
-
-
 }
