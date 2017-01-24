@@ -9,6 +9,7 @@ import controller.MenuController;
 public class MenuView extends View {
 
 	private JPanel panel;
+	private JPanel accountsPanel;
 	private SLabel usernameLabel;
 	private SLabel passwordLabel;
 	private SLabel errorLabel;
@@ -26,9 +27,16 @@ public class MenuView extends View {
 	// This generates the content of the view.
 	private void BuildView() {
 		panel = new JPanel();
-		panel.setOpaque(true);
+		//panel.setOpaque(true);
 		panel.setBackground(new Color(58, 195, 239));
 		panel.setLayout(null);
+
+		accountsPanel = new JPanel();
+		accountsPanel.setOpaque(true);
+		accountsPanel.setBackground(new Color(255, 255, 100));
+		accountsPanel.setLayout(null);
+		accountsPanel.setBounds(100,150,1070,590); // 1280,720
+		panel.add(accountsPanel);
 
 		usernameLabel = new SLabel();
 		usernameLabel.setText("Username:");
@@ -54,7 +62,7 @@ public class MenuView extends View {
 		errorLabel.setBounds(usernameLabel.getX(), passwordInput.getY() + 20, 350, 20);
 		panel.add(errorLabel);
 
-		addAccountButton = new SButton("Registreer");
+		addAccountButton = new SButton("Add Account");
 		addAccountButton.addActionListener(e -> this.addAccountButtonPressed());
 		addAccountButton.setBounds(usernameLabel.getX(), errorLabel.getY() + 20, 220, 20);
 		panel.add(addAccountButton);
