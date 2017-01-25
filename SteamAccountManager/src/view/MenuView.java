@@ -108,11 +108,16 @@ public class MenuView extends View {
 			this.setErrorLabel("Username and password fields may not be empty.");
 		} else {
 			this.emptyErrorLabel();
-			//listModel.addElement(" " + usernameInput.getText() + " ");
 			this.controller.addAccountButtonPressed(usernameInput.getText(),passwordInputConverted);
 			this.emptyInput();
+			listModel.removeAllElements();
+			this.controller.addLabels();
 			this.repaint();
 		}
+	}
+	
+	public void addEntry(String entry) {
+		listModel.addElement(" " + entry + " ");
 	}
 
 	private void emptyInput() {
@@ -122,6 +127,7 @@ public class MenuView extends View {
 
 	private void loginAccount(int index) {
 		this.setErrorLabel("[DEBUG] Logging in  account with account: " + index);
+		// TODO Login, also make the Steam directory settable.
 	}
 
 	// This empties the error label.

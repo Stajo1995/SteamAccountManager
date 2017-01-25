@@ -1,27 +1,25 @@
 package model;
 
+import java.io.BufferedWriter;
+import java.io.FileOutputStream;
 import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.Arrays;
-import java.util.List;
+import java.io.OutputStreamWriter;
+import java.io.Writer;
 
 public class FileWriter {
 
-	public void write(String filetype, String line) {
-		Path file = null;
+	public void write(String fileType, String line) {
+		String file = null;
 
-		switch (filetype) {
+		switch (fileType) {
 		case "Account":
-			file = Paths.get("Storage/AccountNameStorage");
+			file = "Storage/AccountNameStorage";
 			break;
 		case "Password":
-			file = Paths.get("Storage/PasswordStorage");
+			file = "Storage/PasswordStorage";
 			break;
 		case "Security":
-			file = Paths.get("Storage/SecurityStorage");
+			file = "Storage/SecurityStorage";
 			break;
 		default:
 			try {
@@ -31,10 +29,11 @@ public class FileWriter {
 			}
 			break;
 		}
-
-		List<String> lines = Arrays.asList(line);
 		try {
-			Files.write(file, lines, Charset.forName("UTF-8"));
+			Writer writer = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(file, true), "UTF-8"));
+			writer.append(line);
+			((BufferedWriter) writer).newLine();
+			writer.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

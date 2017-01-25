@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.ArrayList;
+
 import view.MenuView;
 
 public class MenuController {
@@ -10,10 +12,20 @@ public class MenuController {
 	public MenuController(Engine engine) {
 		this.engine = engine;
 		this.view = new MenuView(this);
+		this.addLabels();
+	}
+
+	public void addLabels() {
+		if (!this.engine.getStorageController().isEmpty("Account")) {
+			ArrayList<String> list = this.engine.getStorageController().readAllAccountNames();
+			for (int c = 0; c < list.size(); c++) {
+				this.view.addEntry(list.get(c));
+			}
+		}
 	}
 
 	public void addAccountButtonPressed(String userName, String pass) {
-		if (userName.equals("DEBUG")) { // TODO Verify if the account is already stored.
+		if (engine.getStorageController().isDuplicateEntry(userName)) {
 			this.view.setErrorLabel("That account is already stored");
 		} else if (userName.replaceAll("\\s+", "").equals("") || pass.replaceAll("\\s+", "").equals("")) {
 			this.view.setErrorLabel("Illegal username or password provided.");
