@@ -1,21 +1,32 @@
 package view;
 
 import java.awt.Color;
+import java.awt.Rectangle;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
+import javax.swing.DefaultListModel;
+import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 
 import controller.MenuController;
 
 public class MenuView extends View {
 
 	private JPanel panel;
-	private JPanel accountsPanel;
 	private SLabel usernameLabel;
 	private SLabel passwordLabel;
 	private SLabel errorLabel;
 	private STextField usernameInput;
 	private SPasswordField passwordInput;
 	private SButton addAccountButton;
+	private SButton loginButton;
+	private DefaultListModel<String> listModel;
+	private JList<String> list;
 
 	private MenuController controller;
 
@@ -27,16 +38,33 @@ public class MenuView extends View {
 	// This generates the content of the view.
 	private void BuildView() {
 		panel = new JPanel();
-		//panel.setOpaque(true);
 		panel.setBackground(new Color(58, 195, 239));
 		panel.setLayout(null);
 
-		accountsPanel = new JPanel();
-		accountsPanel.setOpaque(true);
-		accountsPanel.setBackground(new Color(255, 255, 100));
-		accountsPanel.setLayout(null);
-		accountsPanel.setBounds(100,150,1070,590); // 1280,720
-		panel.add(accountsPanel);
+		listModel = new DefaultListModel<String>();
+		list = new JList<String>(listModel);
+		list.setSelectionMode(ListSelectionModel.SINGLE_INTERVAL_SELECTION);
+		list.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+		list.setVisibleRowCount(-1);
+		list.setOpaque(true);
+		list.setBackground(new Color(255, 255, 100));
+		list.setFont(list.getFont().deriveFont(22.0f));
+		list.setFixedCellHeight(44);
+		this.add(list);
+
+		list.addMouseListener(new MouseAdapter() {
+			public void mouseClicked(MouseEvent evt) {
+				JList<String> list = (JList<String>) evt.getSource();
+				Rectangle r = list.getCellBounds(0, list.getLastVisibleIndex());
+				if (r != null && r.contains(evt.getPoint()) && evt.getButton() == MouseEvent.BUTTON1 && evt.getClickCount() == 2) {
+					loginAccount(list.locationToIndex(evt.getPoint()));
+				}
+			}
+		}); //TODO right click twice to delete content.
+
+		JScrollPane scrollPane = new JScrollPane(list,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBounds(100, 150, 1070, 500);
+		panel.add(scrollPane);
 
 		usernameLabel = new SLabel();
 		usernameLabel.setText("Username:");
@@ -75,8 +103,20 @@ public class MenuView extends View {
 
 	// This triggers when the add account button has been pressed.
 	private void addAccountButtonPressed() {
-		this.emptyErrorLabel();
-		System.out.println("DEBUG 1"); // DEBUG
+		String passwordInputConverted = new String(passwordInput.getPassword());
+		if (this.usernameInput.getText().equals("") || passwordInputConverted.equals("")) {
+			this.setErrorLabel("Username and password fields may not be empty.");
+		} else {
+			this.emptyErrorLabel();
+			listModel.addElement(" " + usernameInput.getText() + " ");
+			usernameInput.setText("");
+			passwordInput.setText("");
+			this.repaint();
+		}
+	}
+	
+	private void loginAccount(int index) {
+		this.setErrorLabel("[DEBUG] Logging in  account with account: " + index);
 	}
 
 	// This empties the error label.

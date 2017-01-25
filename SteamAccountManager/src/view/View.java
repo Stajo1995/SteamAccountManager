@@ -6,6 +6,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import javax.swing.*;
 
+// Parent to all View elements which would otherwise extend a JFrame.
 public class View extends JFrame {
 
 	protected static final Dimension SCREEN_SIZE_DIM = new Dimension(1280, 720); // 1280,720  default screen size for all  views.
