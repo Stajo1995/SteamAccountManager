@@ -12,6 +12,7 @@ public class FileWriter {
 
 	public void write(String filetype, String line) {
 		Path file = null;
+
 		switch (filetype) {
 		case "Account":
 			file = Paths.get("Storage/AccountNameStorage");

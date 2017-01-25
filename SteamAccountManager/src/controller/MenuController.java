@@ -15,8 +15,9 @@ public class MenuController {
 	public void addAccountButtonPressed(String userName, String pass) {
 		if (userName.equals("DEBUG")) { // TODO Verify if the account is already stored.
 			this.view.setErrorLabel("That account is already stored");
-		}
-		else {
+		} else if (userName.replaceAll("\\s+", "").equals("") || pass.replaceAll("\\s+", "").equals("")) {
+			this.view.setErrorLabel("Illegal username or password provided.");
+		} else {
 			this.write("Account", userName);
 			this.write("Password", pass);
 		}
