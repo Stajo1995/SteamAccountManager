@@ -103,18 +103,23 @@ public class MenuView extends View {
 
 	// This triggers when the add account button has been pressed.
 	private void addAccountButtonPressed() {
-		String passwordInputConverted = new String(passwordInput.getPassword());
+		String passwordInputConverted = new String(passwordInput.getPassword()); // SECURITY FLAW: stores password in memory unit garbage is collected.
 		if (this.usernameInput.getText().equals("") || passwordInputConverted.equals("")) {
 			this.setErrorLabel("Username and password fields may not be empty.");
 		} else {
 			this.emptyErrorLabel();
-			listModel.addElement(" " + usernameInput.getText() + " ");
-			usernameInput.setText("");
-			passwordInput.setText("");
+			//listModel.addElement(" " + usernameInput.getText() + " ");
+			this.controller.addAccountButtonPressed(usernameInput.getText(),passwordInputConverted);
+			this.emptyInput();
 			this.repaint();
 		}
 	}
-	
+
+	private void emptyInput() {
+		usernameInput.setText("");
+		passwordInput.setText("");
+	}
+
 	private void loginAccount(int index) {
 		this.setErrorLabel("[DEBUG] Logging in  account with account: " + index);
 	}
