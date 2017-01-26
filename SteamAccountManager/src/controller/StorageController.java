@@ -31,4 +31,12 @@ public class StorageController {
 		return this.reader.isDuplicateEntry(entry);
 	}
 
+	public String readLine(String fileType, int lineNumber) {
+		return this.reader.readLine(fileType, lineNumber);
+	}
+
+	public void empty(String file) {
+		this.writer.emptyFile(file);
+	}
+
 }

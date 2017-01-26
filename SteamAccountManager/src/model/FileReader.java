@@ -8,6 +8,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -54,7 +56,7 @@ public class FileReader {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			// handle this
+			e.printStackTrace();
 		} finally {
 			scanner.close();
 		}
@@ -76,4 +78,34 @@ public class FileReader {
 		return list;
 	}
 
+	public String readLine(String fileType, int lineNumber) {
+		String file = null;
+
+		switch (fileType) {
+		case "Account":
+			file = "Storage/AccountNameStorage";
+			break;
+		case "Password":
+			file = "Storage/PasswordStorage";
+			break;
+		case "Security":
+			file = "Storage/SecurityStorage";
+			break;
+		default:
+			try {
+				throw new Exception();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			break;
+		}
+
+		String line = null;
+		try {
+			line = Files.readAllLines(Paths.get(file)).get(lineNumber);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return line;
+	}
 }

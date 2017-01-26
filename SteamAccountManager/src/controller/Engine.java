@@ -10,8 +10,8 @@ public class Engine {
 	}
 
 	private void start() {
-		// TODO Add check to see if this PC is the same as last one used, remove all accounts if other PC (Check MAC addr).
 		this.createStorageController();
+		new SecurityController(this);
 		new MenuController(this);
 	}
 
