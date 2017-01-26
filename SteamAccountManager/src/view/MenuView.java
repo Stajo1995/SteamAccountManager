@@ -6,8 +6,8 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.DefaultListModel;
-import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListSelectionModel;
@@ -24,7 +24,7 @@ public class MenuView extends View {
 	private STextField usernameInput;
 	private SPasswordField passwordInput;
 	private SButton addAccountButton;
-	private SButton loginButton;
+	private SButton helpButton;
 	private DefaultListModel<String> listModel;
 	private JList<String> list;
 
@@ -95,10 +95,19 @@ public class MenuView extends View {
 		addAccountButton.setBounds(usernameLabel.getX(), errorLabel.getY() + 20, 220, 20);
 		panel.add(addAccountButton);
 
+		helpButton = new SButton("Help");
+		helpButton.addActionListener(e -> this.helpButtonPressed());
+		helpButton.setBounds(addAccountButton.getX() + 530, addAccountButton.getY(), 100, 20);
+		panel.add(helpButton);
+
 		this.add(panel);
 		this.getRootPane().setDefaultButton(addAccountButton);
 		this.setVisible(true);
 		this.setDefaultFocus();
+	}
+
+	private void helpButtonPressed() {
+		JOptionPane.showMessageDialog(null, "Welcome to the Steam Account Manager by Stajo, use the 'Add Account' button with your Steam account credentials to (locally) store your accounts for quick swapping between them.\nDouble click on a username to log into that account. Do not forget to set your Steam application directory using the 'Steam' button above.", "Information", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	// This triggers when the add account button has been pressed.
