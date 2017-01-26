@@ -64,13 +64,10 @@ public class FileWriter {
 			break;
 		}
 
-		PrintWriter writer = null;
 		try {
-			writer = new PrintWriter(new File(file));
+			new PrintWriter(new File(file)).close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		}
-		writer.print("");
-		writer.close();
 	}
 }
