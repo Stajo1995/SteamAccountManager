@@ -1,10 +1,19 @@
 package runtime;
 
+import controller.Engine;
+
 public class Main {
 
-	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+	/**
+	 * @author Stefan van T.
+	 * @reddit /u/Stevanti
+	 * @steam http://steamcommunity.com/id/Stajo/
+	 * @version 0.0.1
+	 * @license MIT
+	 **/
 
+	public static void main(String[] args) {
+		new Engine();
 	}
 
 }
