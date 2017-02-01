@@ -13,20 +13,44 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import controller.StorageController;
+
 public class FileReader {
 
+	private StorageController controller;
+
+	public FileReader(StorageController controller) {
+		this.controller = controller;
+		this.verifyPaths();
+	}
+
+	private void verifyPaths() {
+		if (Files.notExists(StorageController.STORAGEPATH)) {
+			this.controller.createFile("dir");
+		}
+		if (Files.notExists(StorageController.SECURITYPATH)) {
+			this.controller.createFile("Security");
+		}
+		if (Files.notExists(StorageController.ACCOUNTPATH)) {
+			this.controller.createFile("Account");
+		}
+		if (Files.notExists(StorageController.PASSWORDPATH)) {
+			this.controller.createFile("Password");
+		}
+	}
+
 	public boolean isEmpty(String fileType) {
-		File file = null;
+		String path = null;
 
 		switch (fileType) {
 		case "Account":
-			file = new File("Storage/AccountNameStorage");
+			path = StorageController.ACCOUNTPATH.toString();
 			break;
 		case "Password":
-			file = new File("Storage/PasswordStorage");
+			path = StorageController.PASSWORDPATH.toString();
 			break;
 		case "Security":
-			file = new File("Storage/SecurityStorage");
+			path = StorageController.SECURITYPATH.toString();
 			break;
 		default:
 			try {
@@ -37,7 +61,7 @@ public class FileReader {
 			break;
 		}
 
-		if (file.length() == 0) {
+		if (new File(path).length() == 0) {
 			return true;
 		} else {
 			return false;
@@ -45,7 +69,7 @@ public class FileReader {
 	}
 
 	public boolean isDuplicateEntry(String entry) {
-		File file = new File("Storage/AccountNameStorage");
+		File file = new File(StorageController.ACCOUNTPATH.toString());
 		Scanner scanner = null;
 		try {
 			scanner = new Scanner(file);
@@ -66,7 +90,7 @@ public class FileReader {
 	public ArrayList<String> readAllAccountNames() {
 		String line;
 		ArrayList<String> list = new ArrayList<String>();
-		try (InputStream fis = new FileInputStream("Storage/AccountNameStorage");
+		try (InputStream fis = new FileInputStream(StorageController.ACCOUNTPATH.toString());
 				InputStreamReader isr = new InputStreamReader(fis, Charset.forName("UTF-8"));
 				BufferedReader br = new BufferedReader(isr);) {
 			while ((line = br.readLine()) != null) {
@@ -79,17 +103,17 @@ public class FileReader {
 	}
 
 	public String readLine(String fileType, int lineNumber) {
-		String file = null;
+		String path = null;
 
 		switch (fileType) {
 		case "Account":
-			file = "Storage/AccountNameStorage";
+			path = StorageController.ACCOUNTPATH.toString();
 			break;
 		case "Password":
-			file = "Storage/PasswordStorage";
+			path = StorageController.PASSWORDPATH.toString();
 			break;
 		case "Security":
-			file = "Storage/SecurityStorage";
+			path = StorageController.SECURITYPATH.toString();
 			break;
 		default:
 			try {
@@ -102,7 +126,7 @@ public class FileReader {
 
 		String line = null;
 		try {
-			line = Files.readAllLines(Paths.get(file)).get(lineNumber);
+			line = Files.readAllLines(Paths.get(path)).get(lineNumber);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
