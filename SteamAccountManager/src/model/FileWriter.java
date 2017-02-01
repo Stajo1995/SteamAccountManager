@@ -9,8 +9,8 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+
+import javax.swing.JOptionPane;
 
 import controller.StorageController;
 
@@ -65,7 +65,7 @@ public class FileWriter {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 8", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			break;
 		}
@@ -73,7 +73,7 @@ public class FileWriter {
 		try {
 			new PrintWriter(path, "UTF-8").close();
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error: Cannot write to the storage.\nErrorcode: 9", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -100,7 +100,7 @@ public class FileWriter {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 10", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			break;
 		}
@@ -109,7 +109,7 @@ public class FileWriter {
 			try {
 				new PrintWriter(path, "UTF-8").close();
 			} catch (IOException e) {
-				e.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Error: Cannot write to the storage.\nErrorcode: 11", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 		}
 	}
@@ -131,7 +131,7 @@ public class FileWriter {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 12", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			break;
 		}

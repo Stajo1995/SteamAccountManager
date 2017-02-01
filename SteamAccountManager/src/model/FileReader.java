@@ -13,6 +13,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import controller.StorageController;
 
 public class FileReader {
@@ -56,7 +58,7 @@ public class FileReader {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 3", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			break;
 		}
@@ -80,7 +82,7 @@ public class FileReader {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error: File not found; Account Storage.\nErrorcode: 4", "Error", JOptionPane.ERROR_MESSAGE);
 		} finally {
 			scanner.close();
 		}
@@ -97,7 +99,7 @@ public class FileReader {
 				list.add(line);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error: Cannot read from the Account Storage.\nErrorcode: 5", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		return list;
 	}
@@ -119,7 +121,7 @@ public class FileReader {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 6", "Error", JOptionPane.ERROR_MESSAGE);
 			}
 			break;
 		}
@@ -128,7 +130,7 @@ public class FileReader {
 		try {
 			line = Files.readAllLines(Paths.get(path)).get(lineNumber);
 		} catch (IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error: Cannot read from the storage.\nErrorcode: 7", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		return line;
 	}
