@@ -107,12 +107,12 @@ public class MenuView extends View {
 	}
 
 	private void helpButtonPressed() {
-		JOptionPane.showMessageDialog(null, "Welcome to the Steam Account Manager by Stajo, use the 'Add Account' button with your Steam account credentials to (locally) store your accounts for quick swapping between them.\nDouble click on a username to log into that account. Do not forget to set your Steam application directory using the 'Steam' button above.", "Information", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Welcome to the Steam Account Manager by Stajo, use the 'Add Account' button with your Steam account credentials to (locally) store your accounts for quick swapping between them.\nDouble click on a username to log into that account. Do not forget to set your Steam application directory using the 'Steam' button above.\nThis software is licensed under the MIT license.", "Information", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	// This triggers when the add account button has been pressed.
 	private void addAccountButtonPressed() {
-		String passwordInputConverted = new String(passwordInput.getPassword()); // SECURITY FLAW: stores password in memory unit garbage is collected.
+		String passwordInputConverted = new String(passwordInput.getPassword()); // SECURITY FLAW: stores password in memory until garbage is collected.
 		if (this.usernameInput.getText().equals("") || passwordInputConverted.equals("")) {
 			this.setErrorLabel("Username and password fields may not be empty.");
 		} else {

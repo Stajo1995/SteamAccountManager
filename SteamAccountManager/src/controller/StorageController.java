@@ -1,5 +1,7 @@
 package controller;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 
 import model.FileReader;
@@ -7,12 +9,18 @@ import model.FileWriter;
 
 public class StorageController {
 
+	public static final String PATHSTRING = System.getenv("APPDATA") + "\\SteamAccountManager";
+	public static final Path STORAGEPATH = Paths.get(PATHSTRING);
+	public static final Path ACCOUNTPATH = Paths.get(PATHSTRING + "\\SAMAC");
+	public static final Path PASSWORDPATH = Paths.get(PATHSTRING + "\\SAMPW");
+	public static final Path SECURITYPATH = Paths.get(PATHSTRING + "\\SAMSC");
+
 	private FileWriter writer;
 	private FileReader reader;
 
 	public StorageController() {
 		this.writer = new FileWriter();
-		this.reader = new FileReader();
+		this.reader = new FileReader(this);
 	}
 
 	public void write(String file, String line) {
@@ -37,6 +45,10 @@ public class StorageController {
 
 	public void empty(String file) {
 		this.writer.emptyFile(file);
+	}
+
+	public void createFile(String file) {
+		this.writer.createFile(file);
 	}
 
 }
