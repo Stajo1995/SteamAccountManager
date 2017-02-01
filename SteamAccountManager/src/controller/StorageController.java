@@ -51,4 +51,8 @@ public class StorageController {
 		this.writer.createFile(file);
 	}
 
+	public void deleteLine(int lineNumber) {
+		this.writer.deleteLine("Account", lineNumber);
+		this.writer.deleteLine("Password", lineNumber);
+	}
 }

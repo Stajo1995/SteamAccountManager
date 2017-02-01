@@ -9,6 +9,8 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.io.UnsupportedEncodingException;
 import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import controller.StorageController;
 
@@ -110,5 +112,31 @@ public class FileWriter {
 				e.printStackTrace();
 			}
 		}
+	}
+
+	public void deleteLine(String fileType, int lineNumber) {
+		String path = null;
+
+		switch (fileType) {
+		case "Account":
+			path = StorageController.ACCOUNTPATH.toString();
+			break;
+		case "Password":
+			path = StorageController.PASSWORDPATH.toString();
+			break;
+		case "Security":
+			path = StorageController.SECURITYPATH.toString();
+			break;
+		default:
+			try {
+				throw new Exception();
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+			break;
+		}
+
+		// TODO: Deleting a line from a file by line number.
+		System.out.println("Deleting line " + lineNumber + " from " + path + " found by: " + fileType);
 	}
 }

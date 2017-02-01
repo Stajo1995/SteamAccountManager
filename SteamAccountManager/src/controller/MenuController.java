@@ -25,7 +25,7 @@ public class MenuController {
 	}
 
 	public void addAccountButtonPressed(String userName, String pass) {
-		if (engine.getStorageController().isDuplicateEntry(userName)) {
+		if (this.engine.getStorageController().isDuplicateEntry(userName)) {
 			this.view.setErrorLabel("That account is already stored");
 		} else if (userName.replaceAll("\\s+", "").equals("") || pass.replaceAll("\\s+", "").equals("")) {
 			this.view.setErrorLabel("Illegal username or password provided.");
@@ -33,6 +33,14 @@ public class MenuController {
 			this.write("Account", userName);
 			this.write("Password", pass);
 		}
+	}
+
+	public void loginAccount(int index) {
+		
+	}
+
+	public void deleteAccount(int index) {
+		this.engine.getStorageController().deleteLine(index);
 	}
 
 	private void write(String file, String line) {
