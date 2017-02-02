@@ -30,6 +30,7 @@ public class MenuView extends View {
 
 	private MenuController controller;
 
+	// TODO: Add a Steam button which sets the STeam directory.
 	public MenuView(MenuController menuController) {
 		this.controller = menuController;
 		this.BuildView();
@@ -58,9 +59,11 @@ public class MenuView extends View {
 				Rectangle r = list.getCellBounds(0, list.getLastVisibleIndex());
 				if (r != null && r.contains(evt.getPoint()) && evt.getButton() == MouseEvent.BUTTON1 && evt.getClickCount() == 2) {
 					loginAccount(list.locationToIndex(evt.getPoint()));
+				} else if (r != null && r.contains(evt.getPoint()) && evt.getButton() == MouseEvent.BUTTON3 && evt.getClickCount() == 2) {
+					deleteAccount(list.locationToIndex(evt.getPoint()));
 				}
 			}
-		}); //TODO right click twice to delete content.
+		});
 
 		JScrollPane scrollPane = new JScrollPane(list,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(100, 150, 1070, 500);
@@ -107,7 +110,7 @@ public class MenuView extends View {
 	}
 
 	private void helpButtonPressed() {
-		JOptionPane.showMessageDialog(null, "Welcome to the Steam Account Manager by Stajo, use the 'Add Account' button with your Steam account credentials to (locally) store your accounts for quick swapping between them.\nDouble click on a username to log into that account. Do not forget to set your Steam application directory using the 'Steam' button above.\nThis software is licensed under the MIT license.", "Information", JOptionPane.INFORMATION_MESSAGE);
+		JOptionPane.showMessageDialog(null, "Welcome to the Steam Account Manager by Stajo, use the 'Add Account' button with your Steam account credentials to (locally) store your accounts for quick swapping between them.\nSet your Steam directory by clicking the 'Steam' button in the top right.\nDouble left click on a username to log into that account.\nDouble right click on a username to delete that account from the storage.\nThis software is licensed under the MIT license.", "Information", JOptionPane.INFORMATION_MESSAGE);
 	}
 
 	// This triggers when the add account button has been pressed.
@@ -119,36 +122,44 @@ public class MenuView extends View {
 			this.emptyErrorLabel();
 			this.controller.addAccountButtonPressed(usernameInput.getText(),passwordInputConverted);
 			this.emptyInput();
-			listModel.removeAllElements();
+			this.listModel.removeAllElements();
 			this.controller.addLabels();
 			this.repaint();
 		}
 	}
 	
 	public void addEntry(String entry) {
-		listModel.addElement(" " + entry + " ");
+		this.listModel.addElement(" " + entry + " ");
 	}
 
 	private void emptyInput() {
-		usernameInput.setText("");
-		passwordInput.setText("");
+		this.usernameInput.setText("");
+		this.passwordInput.setText("");
 	}
 
 	private void loginAccount(int index) {
 		this.setErrorLabel("[DEBUG] Logging in  account with account: " + index);
-		// TODO Login, also make the Steam directory settable.
+		// TODO Login with Steam.
+		this.controller.loginAccount(index);
+	}
+	
+	private void deleteAccount(int index) {
+		this.controller.deleteAccount(index);
+		this.listModel.removeAllElements();
+		this.controller.addLabels();
+		this.repaint();
 	}
 
 	// This empties the error label.
 	private void emptyErrorLabel() {
-		errorLabel.setText("");
-		errorLabel.repaint();
+		this.errorLabel.setText("");
+		this.errorLabel.repaint();
 	}
 
 	// This sets the error label with a new string.
 	public void setErrorLabel(String NewLabel) {
-		errorLabel.setText(NewLabel);
-		errorLabel.repaint();
+		this.errorLabel.setText(NewLabel);
+		this.errorLabel.repaint();
 	}
 
 	// Sets the default focus to the primary input textfield.

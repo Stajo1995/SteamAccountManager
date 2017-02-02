@@ -21,13 +21,13 @@ public class SecurityController {
 		try {
 			network = NetworkInterface.getByInetAddress(InetAddress.getLocalHost());
 		} catch (SocketException | UnknownHostException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error: Internet connection is required for security puposes.\nErrorcode: 1", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		byte[] mac = null;
 		try {
 			mac = network.getHardwareAddress();
 		} catch (SocketException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error: Internet connection is required for security puposes.\nErrorcode: 2", "Error", JOptionPane.ERROR_MESSAGE);
 		}
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < mac.length; i++) {

@@ -13,6 +13,8 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import javax.swing.JOptionPane;
+
 import controller.StorageController;
 
 public class FileReader {
@@ -56,7 +58,8 @@ public class FileReader {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 3", "Error",
+						JOptionPane.ERROR_MESSAGE);
 			}
 			break;
 		}
@@ -80,24 +83,48 @@ public class FileReader {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error: File not found; Account Storage.\nErrorcode: 4", "Error",
+					JOptionPane.ERROR_MESSAGE);
 		} finally {
 			scanner.close();
 		}
 		return false;
 	}
 
-	public ArrayList<String> readAllAccountNames() {
+	public ArrayList<String> getAllLines(String fileType) {
+		String path = null;
+
+		switch (fileType) {
+		case "Account":
+			path = StorageController.ACCOUNTPATH.toString();
+			break;
+		case "Password":
+			path = StorageController.PASSWORDPATH.toString();
+			break;
+		case "Security":
+			path = StorageController.SECURITYPATH.toString();
+			break;
+		default:
+			try {
+				throw new Exception();
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 6", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
+			break;
+		}
+
 		String line;
 		ArrayList<String> list = new ArrayList<String>();
-		try (InputStream fis = new FileInputStream(StorageController.ACCOUNTPATH.toString());
+		try (InputStream fis = new FileInputStream(path);
 				InputStreamReader isr = new InputStreamReader(fis, Charset.forName("UTF-8"));
 				BufferedReader br = new BufferedReader(isr);) {
 			while ((line = br.readLine()) != null) {
 				list.add(line);
 			}
 		} catch (IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error: Cannot read from the Account Storage.\nErrorcode: 5", "Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 		return list;
 	}
@@ -119,7 +146,8 @@ public class FileReader {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				ex.printStackTrace();
+				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 6", "Error",
+						JOptionPane.ERROR_MESSAGE);
 			}
 			break;
 		}
@@ -128,7 +156,8 @@ public class FileReader {
 		try {
 			line = Files.readAllLines(Paths.get(path)).get(lineNumber);
 		} catch (IOException e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Error: Cannot read from the storage.\nErrorcode: 7", "Error",
+					JOptionPane.ERROR_MESSAGE);
 		}
 		return line;
 	}
