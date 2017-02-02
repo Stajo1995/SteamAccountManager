@@ -25,6 +25,7 @@ public class MenuView extends View {
 	private SPasswordField passwordInput;
 	private SButton addAccountButton;
 	private SButton helpButton;
+	private SButton steamButton;
 	private DefaultListModel<String> listModel;
 	private JList<String> list;
 
@@ -103,10 +104,19 @@ public class MenuView extends View {
 		helpButton.setBounds(addAccountButton.getX() + 530, addAccountButton.getY(), 100, 20);
 		panel.add(helpButton);
 
+		helpButton = new SButton("Steam");
+		helpButton.addActionListener(e -> this.steamButtonPressed());
+		helpButton.setBounds(usernameLabel.getX() + 530, usernameLabel.getY(), 100, 20);
+		panel.add(helpButton);
+
 		this.add(panel);
 		this.getRootPane().setDefaultButton(addAccountButton);
 		this.setVisible(true);
 		this.setDefaultFocus();
+	}
+
+	private void steamButtonPressed() {
+		this.controller.steamButtonPressed();
 	}
 
 	private void helpButtonPressed() {
@@ -138,8 +148,6 @@ public class MenuView extends View {
 	}
 
 	private void loginAccount(int index) {
-		this.setErrorLabel("[DEBUG] Logging in  account with account: " + index);
-		// TODO Login with Steam.
 		this.controller.loginAccount(index);
 	}
 	

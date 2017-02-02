@@ -36,7 +36,7 @@ public class MenuController {
 	}
 
 	public void loginAccount(int index) {
-		
+		this.engine.getStorageController().runSteam(index);
 	}
 
 	public void deleteAccount(int index) {
@@ -45,5 +45,9 @@ public class MenuController {
 
 	private void write(String file, String line) {
 		this.engine.getStorageController().write(file, line);
+	}
+
+	public void steamButtonPressed() {
+		this.engine.getSteamController().popupSteamLocationDialog(true);
 	}
 }

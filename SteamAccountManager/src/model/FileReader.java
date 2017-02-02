@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -27,18 +28,55 @@ public class FileReader {
 	}
 
 	private void verifyPaths() {
-		if (Files.notExists(StorageController.STORAGEPATH)) {
+		if (!this.isPath(StorageController.STORAGEPATH)) {
 			this.controller.createFile("dir");
 		}
-		if (Files.notExists(StorageController.SECURITYPATH)) {
+		if (!this.isPath(StorageController.SECURITYPATH)) {
 			this.controller.createFile("Security");
 		}
-		if (Files.notExists(StorageController.ACCOUNTPATH)) {
+		if (!this.isPath(StorageController.ACCOUNTPATH)) {
 			this.controller.createFile("Account");
 		}
-		if (Files.notExists(StorageController.PASSWORDPATH)) {
+		if (!this.isPath(StorageController.PASSWORDPATH)) {
 			this.controller.createFile("Password");
 		}
+	}
+
+	public boolean isPath(Path path) {
+		if (Files.notExists(path)) {
+			return false;
+		}
+		return true;
+	}
+
+	// TODO Windows only for now.
+	public void runSteam(int index) {
+		try {
+			String line;
+			String pidInfo = "";
+			Process p = Runtime.getRuntime().exec(System.getenv("windir") + "\\system32\\" + "tasklist.exe");
+			BufferedReader input = new BufferedReader(new InputStreamReader(p.getInputStream()));
+
+			while ((line = input.readLine()) != null) {
+				pidInfo += line;
+			}
+
+			input.close();
+
+			if (pidInfo.contains("Steam.exe")) {
+				Runtime.getRuntime().exec("taskkill /F /IM Steam.exe");
+				// Sleep 1 second, for some reason the taskkill will kill the Steam Process that is about to start if ran right away.
+				Thread.sleep(1000);
+			}
+
+			Runtime.getRuntime().exec(this.readLine("Security", 1) + "-login " + this.readLine("Account", index) + " "
+					+ this.readLine("Password", index));
+			;
+		} catch (IOException | InterruptedException e) {
+			JOptionPane.showMessageDialog(null, "Error: Cannot launch Steam, path seems incorrect.\nErrorcode: 20",
+					"Error", JOptionPane.ERROR_MESSAGE);
+		}
+		System.exit(0);
 	}
 
 	public boolean isEmpty(String fileType) {
@@ -146,7 +184,7 @@ public class FileReader {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 6", "Error",
+				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 6b", "Error",
 						JOptionPane.ERROR_MESSAGE);
 			}
 			break;
@@ -155,10 +193,47 @@ public class FileReader {
 		String line = null;
 		try {
 			line = Files.readAllLines(Paths.get(path)).get(lineNumber);
-		} catch (IOException e) {
+		} catch (IOException | IndexOutOfBoundsException e) {
 			JOptionPane.showMessageDialog(null, "Error: Cannot read from the storage.\nErrorcode: 7", "Error",
 					JOptionPane.ERROR_MESSAGE);
 		}
 		return line;
+	}
+
+	public int fileSize(String fileType) {
+		String path = null;
+
+		switch (fileType) {
+		case "Account":
+			path = StorageController.ACCOUNTPATH.toString();
+			break;
+		case "Password":
+			path = StorageController.PASSWORDPATH.toString();
+			break;
+		case "Security":
+			path = StorageController.SECURITYPATH.toString();
+			break;
+		default:
+			try {
+				throw new Exception();
+			} catch (Exception ex) {
+				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 6a", "Error",
+						JOptionPane.ERROR_MESSAGE);
+			}
+			break;
+		}
+		int lines = 0;
+
+		try (InputStream fis = new FileInputStream(path);
+				InputStreamReader isr = new InputStreamReader(fis, Charset.forName("UTF-8"));
+				BufferedReader br = new BufferedReader(isr);) {
+			while ((br.readLine()) != null) {
+				lines++;
+			}
+		} catch (IOException e) {
+			JOptionPane.showMessageDialog(null, "Error: Cannot read from the Account Storage.\nErrorcode: 5a", "Error",
+					JOptionPane.ERROR_MESSAGE);
+		}
+		return lines;
 	}
 }
