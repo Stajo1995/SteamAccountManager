@@ -31,7 +31,6 @@ public class MenuView extends View {
 	private MenuController controller;
 
 	// TODO: Add a Steam button which sets the STeam directory.
-	// TODO: Adjust help text.
 	public MenuView(MenuController menuController) {
 		this.controller = menuController;
 		this.BuildView();
@@ -64,7 +63,7 @@ public class MenuView extends View {
 					deleteAccount(list.locationToIndex(evt.getPoint()));
 				}
 			}
-		}); //TODO right click twice to delete content.
+		});
 
 		JScrollPane scrollPane = new JScrollPane(list,ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED,ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(100, 150, 1070, 500);
@@ -145,8 +144,6 @@ public class MenuView extends View {
 	}
 	
 	private void deleteAccount(int index) {
-		this.setErrorLabel("[DEBUG] Deleting account: " + index);
-		// TODO Remove account.
 		this.controller.deleteAccount(index);
 		this.listModel.removeAllElements();
 		this.controller.addLabels();

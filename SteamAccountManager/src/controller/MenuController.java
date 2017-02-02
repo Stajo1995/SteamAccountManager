@@ -17,7 +17,7 @@ public class MenuController {
 
 	public void addLabels() {
 		if (!this.engine.getStorageController().isEmpty("Account")) {
-			ArrayList<String> list = this.engine.getStorageController().readAllAccountNames();
+			ArrayList<String> list = this.engine.getStorageController().getAllLines("Account");
 			for (int c = 0; c < list.size(); c++) {
 				this.view.addEntry(list.get(c));
 			}

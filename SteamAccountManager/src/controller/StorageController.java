@@ -19,7 +19,7 @@ public class StorageController {
 	private FileReader reader;
 
 	public StorageController() {
-		this.writer = new FileWriter();
+		this.writer = new FileWriter(this);
 		this.reader = new FileReader(this);
 	}
 
@@ -27,8 +27,8 @@ public class StorageController {
 		this.writer.write(file, line);
 	}
 
-	public ArrayList<String> readAllAccountNames() {
-		return this.reader.readAllAccountNames();
+	public ArrayList<String> getAllLines(String fileType) {
+		return this.reader.getAllLines(fileType);
 	}
 
 	public boolean isEmpty(String fileType) {
