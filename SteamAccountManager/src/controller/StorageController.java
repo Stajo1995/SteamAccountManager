@@ -27,6 +27,18 @@ public class StorageController {
 		this.writer.write(file, line);
 	}
 
+	public void runSteam(int index) {
+		this.reader.runSteam(index);
+	}
+
+	public boolean isPath(Path path) {
+		return this.reader.isPath(path);
+	}
+
+	public int fileSize(String fileType) {
+		return reader.fileSize(fileType);
+	}
+
 	public ArrayList<String> getAllLines(String fileType) {
 		return this.reader.getAllLines(fileType);
 	}

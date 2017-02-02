@@ -4,6 +4,7 @@ package controller;
 public class Engine {
 
 	private StorageController storage;
+	private SteamController steam;
 
 	public Engine() {
 		this.start();
@@ -12,6 +13,7 @@ public class Engine {
 	private void start() {
 		this.createStorageController();
 		new SecurityController(this);
+		this.createSteamController();
 		new MenuController(this);
 	}
 
@@ -19,8 +21,16 @@ public class Engine {
 		this.storage = new StorageController();
 	}
 
+	private void createSteamController() {
+		this.steam = new SteamController(this);
+	}
+
 	public StorageController getStorageController() {
 		return this.storage;
+	}
+
+	public SteamController getSteamController() {
+		return this.steam;
 	}
 
 }
