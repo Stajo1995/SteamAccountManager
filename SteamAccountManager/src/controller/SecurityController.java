@@ -7,6 +7,8 @@ import java.net.UnknownHostException;
 
 import javax.swing.JOptionPane;
 
+import model.ErrorHandler;
+
 public class SecurityController {
 
 	private Engine engine;
@@ -21,17 +23,18 @@ public class SecurityController {
 		try {
 			network = NetworkInterface.getByInetAddress(InetAddress.getLocalHost());
 		} catch (SocketException | UnknownHostException e) {
-			JOptionPane.showMessageDialog(null, "Error: Internet connection is required for security puposes.\nErrorcode: 1", "Error", JOptionPane.ERROR_MESSAGE);
+			ErrorHandler.crash(1, 'a');
 		}
 		byte[] mac = null;
+		StringBuilder sb = new StringBuilder();
 		try {
 			mac = network.getHardwareAddress();
+
+			for (int i = 0; i < mac.length; i++) {
+				sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+			}
 		} catch (SocketException e) {
-			JOptionPane.showMessageDialog(null, "Error: Internet connection is required for security puposes.\nErrorcode: 2", "Error", JOptionPane.ERROR_MESSAGE);
-		}
-		StringBuilder sb = new StringBuilder();
-		for (int i = 0; i < mac.length; i++) {
-			sb.append(String.format("%02X%s", mac[i], (i < mac.length - 1) ? "-" : ""));
+			ErrorHandler.crash(1, 'b');
 		}
 
 		if (this.engine.getStorageController().isEmpty("Security")) {
@@ -41,7 +44,8 @@ public class SecurityController {
 			this.engine.getStorageController().empty("Password");
 			this.engine.getStorageController().empty("Security");
 			this.engine.getStorageController().write("Security", sb.toString());
-			JOptionPane.showMessageDialog(null, "New computer detected: Cleaning cache.", "Security violation", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "New computer detected: Cleaning cache.", "Security violation",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }

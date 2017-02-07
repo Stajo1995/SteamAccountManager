@@ -8,7 +8,7 @@ public class Main {
 	 * @author Stefan van T.
 	 * @reddit /u/Stevanti
 	 * @steam http://steamcommunity.com/id/Stajo/
-	 * @version 0.0.4
+	 * @version 0.0.5
 	 * @license MIT
 	 **/
 

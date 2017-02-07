@@ -39,6 +39,15 @@ public class StorageController {
 		return reader.fileSize(fileType);
 	}
 
+	public void handleSteamPath(String path) {
+		if (this.reader.fileSize("Security") > 1) {
+			String macAddr = this.readLine("Security", 0);
+			this.empty("Security");
+			this.write("Security", macAddr);
+		}
+		this.write("Security", path);
+	}
+
 	public ArrayList<String> getAllLines(String fileType) {
 		return this.reader.getAllLines(fileType);
 	}

@@ -26,7 +26,7 @@ public class SteamController {
 
 	public void popupSteamLocationDialog(Boolean isRunFromExternalSource) {
 		String inputPath = JOptionPane.showInputDialog(null,
-				"Please enter the path to your Steam application (do not use quotes)\nThe path should propably end with \\Steam.exe",
+				"Please enter the path to your Steam application (do not use quotes)\nThe path should end with \\Steam.exe",
 				"Cannot locate Steam", JOptionPane.WARNING_MESSAGE);
 		if (!isRunFromExternalSource && inputPath == null) {
 			JOptionPane.showMessageDialog(null, "Error: The application cannot continue without locating Steam.",
@@ -36,7 +36,7 @@ public class SteamController {
 			Path path = Paths.get(inputPath);
 
 			if (this.engine.getStorageController().isPath(path)) {
-				this.engine.getStorageController().write("Security", "\"" + inputPath + "\"");
+				this.engine.getStorageController().handleSteamPath("\"" + inputPath + "\"");
 			} else {
 				JOptionPane.showMessageDialog(null, "Error: Invalid path provided.", "Cannot locate Steam",
 						JOptionPane.ERROR_MESSAGE);
