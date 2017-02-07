@@ -36,8 +36,8 @@ public class FileWriter {
 			break;
 		default:
 			try {
-				throw new Exception();
-			} catch (Exception ex) {
+				throw new UnreachableCodeException();
+			} catch (UnreachableCodeException ex) {
 				ErrorHandler.crash(3, 'e');
 			}
 			break;
@@ -68,8 +68,8 @@ public class FileWriter {
 			break;
 		default:
 			try {
-				throw new Exception();
-			} catch (Exception ex) {
+				throw new UnreachableCodeException();
+			} catch (UnreachableCodeException ex) {
 				ErrorHandler.crash(3, 'f');
 			}
 			break;
@@ -103,8 +103,8 @@ public class FileWriter {
 			break;
 		default:
 			try {
-				throw new Exception();
-			} catch (Exception ex) {
+				throw new UnreachableCodeException();
+			} catch (UnreachableCodeException ex) {
 				ErrorHandler.crash(3, 'g');
 			}
 			break;
@@ -134,8 +134,8 @@ public class FileWriter {
 			break;
 		default:
 			try {
-				throw new Exception();
-			} catch (Exception ex) {
+				throw new UnreachableCodeException();
+			} catch (UnreachableCodeException ex) {
 				ErrorHandler.crash(3, 'h');
 			}
 			break;

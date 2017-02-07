@@ -92,8 +92,8 @@ public class FileReader {
 			break;
 		default:
 			try {
-				throw new Exception();
-			} catch (Exception ex) {
+				throw new UnreachableCodeException();
+			} catch (UnreachableCodeException ex) {
 				ErrorHandler.crash(3, 'a');
 			}
 			break;
@@ -140,8 +140,8 @@ public class FileReader {
 			break;
 		default:
 			try {
-				throw new Exception();
-			} catch (Exception ex) {
+				throw new UnreachableCodeException();
+			} catch (UnreachableCodeException ex) {
 				ErrorHandler.crash(3, 'b');
 			}
 			break;
@@ -176,8 +176,8 @@ public class FileReader {
 			break;
 		default:
 			try {
-				throw new Exception();
-			} catch (Exception ex) {
+				throw new UnreachableCodeException();
+			} catch (UnreachableCodeException ex) {
 				ErrorHandler.crash(3, 'c');
 			}
 			break;
@@ -207,8 +207,8 @@ public class FileReader {
 			break;
 		default:
 			try {
-				throw new Exception();
-			} catch (Exception ex) {
+				throw new UnreachableCodeException();
+			} catch (UnreachableCodeException ex) {
 				ErrorHandler.crash(3, 'd');
 			}
 			break;
