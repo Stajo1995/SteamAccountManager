@@ -104,10 +104,10 @@ public class MenuView extends View {
 		helpButton.setBounds(addAccountButton.getX() + 530, addAccountButton.getY(), 100, 20);
 		panel.add(helpButton);
 
-		helpButton = new SButton("Steam");
-		helpButton.addActionListener(e -> this.steamButtonPressed());
-		helpButton.setBounds(usernameLabel.getX() + 530, usernameLabel.getY(), 100, 20);
-		panel.add(helpButton);
+		steamButton = new SButton("Steam");
+		steamButton.addActionListener(e -> this.steamButtonPressed());
+		steamButton.setBounds(usernameLabel.getX() + 530, usernameLabel.getY(), 100, 20);
+		panel.add(steamButton);
 
 		this.add(panel);
 		this.getRootPane().setDefaultButton(addAccountButton);

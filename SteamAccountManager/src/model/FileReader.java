@@ -65,7 +65,8 @@ public class FileReader {
 
 			if (pidInfo.contains("Steam.exe")) {
 				Runtime.getRuntime().exec("taskkill /F /IM Steam.exe");
-				// Sleep 1 second, for some reason the taskkill will kill the Steam Process that is about to start if ran right away.
+				// Sleep 1 second, for some reason the taskkill will kill the
+				// Steam Process that is about to start if ran right away.
 				Thread.sleep(1000);
 			}
 
@@ -73,8 +74,7 @@ public class FileReader {
 					+ this.readLine("Password", index));
 			;
 		} catch (IOException | InterruptedException e) {
-			JOptionPane.showMessageDialog(null, "Error: Cannot launch Steam, path seems incorrect.\nErrorcode: 20",
-					"Error", JOptionPane.ERROR_MESSAGE);
+			ErrorHandler.crash(2, 'a');
 		}
 		System.exit(0);
 	}
@@ -96,8 +96,7 @@ public class FileReader {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 3", "Error",
-						JOptionPane.ERROR_MESSAGE);
+				ErrorHandler.crash(3, 'a');
 			}
 			break;
 		}
@@ -121,8 +120,7 @@ public class FileReader {
 				}
 			}
 		} catch (FileNotFoundException e) {
-			JOptionPane.showMessageDialog(null, "Error: File not found; Account Storage.\nErrorcode: 4", "Error",
-					JOptionPane.ERROR_MESSAGE);
+			ErrorHandler.crash(4, 'a');
 		} finally {
 			scanner.close();
 		}
@@ -146,8 +144,7 @@ public class FileReader {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 6", "Error",
-						JOptionPane.ERROR_MESSAGE);
+				ErrorHandler.crash(3, 'b');
 			}
 			break;
 		}
@@ -161,8 +158,7 @@ public class FileReader {
 				list.add(line);
 			}
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Error: Cannot read from the Account Storage.\nErrorcode: 5", "Error",
-					JOptionPane.ERROR_MESSAGE);
+			ErrorHandler.crash(5, 'a');
 		}
 		return list;
 	}
@@ -184,8 +180,7 @@ public class FileReader {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 6b", "Error",
-						JOptionPane.ERROR_MESSAGE);
+				ErrorHandler.crash(3, 'c');
 			}
 			break;
 		}
@@ -194,8 +189,7 @@ public class FileReader {
 		try {
 			line = Files.readAllLines(Paths.get(path)).get(lineNumber);
 		} catch (IOException | IndexOutOfBoundsException e) {
-			JOptionPane.showMessageDialog(null, "Error: Cannot read from the storage.\nErrorcode: 7", "Error",
-					JOptionPane.ERROR_MESSAGE);
+			ErrorHandler.crash(6, 'a');
 		}
 		return line;
 	}
@@ -217,8 +211,7 @@ public class FileReader {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 6a", "Error",
-						JOptionPane.ERROR_MESSAGE);
+				ErrorHandler.crash(3, 'd');
 			}
 			break;
 		}
@@ -231,8 +224,7 @@ public class FileReader {
 				lines++;
 			}
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Error: Cannot read from the Account Storage.\nErrorcode: 5a", "Error",
-					JOptionPane.ERROR_MESSAGE);
+			ErrorHandler.crash(6, 'a');
 		}
 		return lines;
 	}

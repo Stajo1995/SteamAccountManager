@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
 import controller.StorageController;
 
 public class FileWriter {
-	
+
 	private StorageController controller;
-	
+
 	public FileWriter(StorageController controller) {
 		this.controller = controller;
 	}
@@ -40,8 +40,7 @@ public class FileWriter {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 8a", "Error", JOptionPane.ERROR_MESSAGE);
-
+				ErrorHandler.crash(3, 'e');
 			}
 			break;
 		}
@@ -52,7 +51,7 @@ public class FileWriter {
 			((BufferedWriter) writer).newLine();
 			writer.close();
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Error: Cannot write to storage.\nErrorcode: 8b", "Error", JOptionPane.ERROR_MESSAGE);
+			ErrorHandler.crash(7, 'a');
 		}
 	}
 
@@ -73,7 +72,7 @@ public class FileWriter {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 8", "Error", JOptionPane.ERROR_MESSAGE);
+				ErrorHandler.crash(3, 'f');
 			}
 			break;
 		}
@@ -81,7 +80,7 @@ public class FileWriter {
 		try {
 			new PrintWriter(path, "UTF-8").close();
 		} catch (FileNotFoundException | UnsupportedEncodingException e) {
-			JOptionPane.showMessageDialog(null, "Error: Cannot write to the storage.\nErrorcode: 9", "Error", JOptionPane.ERROR_MESSAGE);
+			ErrorHandler.crash(7, 'b');
 		}
 	}
 
@@ -108,7 +107,7 @@ public class FileWriter {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 10", "Error", JOptionPane.ERROR_MESSAGE);
+				ErrorHandler.crash(3, 'g');
 			}
 			break;
 		}
@@ -117,7 +116,7 @@ public class FileWriter {
 			try {
 				new PrintWriter(path, "UTF-8").close();
 			} catch (IOException e) {
-				JOptionPane.showMessageDialog(null, "Error: Cannot write to the storage.\nErrorcode: 11", "Error", JOptionPane.ERROR_MESSAGE);
+				ErrorHandler.crash(7, 'c');
 			}
 		}
 	}
@@ -139,7 +138,7 @@ public class FileWriter {
 			try {
 				throw new Exception();
 			} catch (Exception ex) {
-				JOptionPane.showMessageDialog(null, "Error: Unreachable code reached.\nErrorcode: 12", "Error", JOptionPane.ERROR_MESSAGE);
+				ErrorHandler.crash(3, 'h');
 			}
 			break;
 		}
@@ -159,7 +158,7 @@ public class FileWriter {
 
 			writer.close();
 		} catch (IOException e) {
-			JOptionPane.showMessageDialog(null, "Error: Cannot write to the storage.\nErrorcode: 8c", "Error", JOptionPane.ERROR_MESSAGE);
+			ErrorHandler.crash(7, 'd');
 		}
 	}
 }
