@@ -7,7 +7,9 @@ import javax.swing.JTextField;
 
 //Predefined styling for textfields.
 public class STextField extends JTextField {
-	
+
+	private static final long serialVersionUID = 6066258362296629034L;
+
 	public STextField() {
 		this.setStyle();
 	}

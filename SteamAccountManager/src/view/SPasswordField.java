@@ -8,6 +8,8 @@ import javax.swing.JPasswordField;
 //Predefined styling for passwordfields.
 public class SPasswordField extends JPasswordField {
 
+	private static final long serialVersionUID = -5797148041528339458L;
+
 	public SPasswordField() {
 		this.setStyle();
 	}

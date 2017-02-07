@@ -11,8 +11,6 @@ import java.io.UnsupportedEncodingException;
 import java.io.Writer;
 import java.util.ArrayList;
 
-import javax.swing.JOptionPane;
-
 import controller.StorageController;
 
 public class FileWriter {

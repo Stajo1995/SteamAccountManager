@@ -9,6 +9,8 @@ import javax.swing.*;
 // Parent to all View elements which would otherwise extend a JFrame.
 public class View extends JFrame {
 
+	private static final long serialVersionUID = -8201395329382103296L;
+
 	protected static final Dimension SCREEN_SIZE_DIM = new Dimension(1280, 720); // 1280,720  default screen size for all  views.
 	protected static Point position; // Saves the last known location of JFrame views on their disposal.
 

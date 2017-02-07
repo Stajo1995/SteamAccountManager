@@ -17,6 +17,8 @@ import controller.MenuController;
 
 public class MenuView extends View {
 
+	private static final long serialVersionUID = 7320847807043519869L;
+
 	private JPanel panel;
 	private SLabel usernameLabel;
 	private SLabel passwordLabel;
@@ -31,7 +33,6 @@ public class MenuView extends View {
 
 	private MenuController controller;
 
-	// TODO: Add a Steam button which sets the STeam directory.
 	public MenuView(MenuController menuController) {
 		this.controller = menuController;
 		this.BuildView();
@@ -55,6 +56,7 @@ public class MenuView extends View {
 		this.add(list);
 
 		list.addMouseListener(new MouseAdapter() {
+			@SuppressWarnings("unchecked")
 			public void mouseClicked(MouseEvent evt) {
 				JList<String> list = (JList<String>) evt.getSource();
 				Rectangle r = list.getCellBounds(0, list.getLastVisibleIndex());
